@@ -1,11 +1,9 @@
 const taskRepository = require('../repository/task.repository')
 
-class TaskService {
-	constructor() {}
-
+const TaskService = {
 	async getTasks() {
 		return await taskRepository.getTasks()
 	}
 }
 
-module.exports = new TaskService()
+module.exports = TaskService
