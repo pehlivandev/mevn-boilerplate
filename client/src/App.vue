@@ -31,6 +31,7 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import useVuelidate from '@vuelidate/core'
+import wordService from '@/services/word.service'
 
 const state = reactive({
   name: '',
@@ -49,7 +50,9 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, state)
 
 function addWord () {
-  alert('add word')
+  wordService.setWord(state).then(response => {
+    console.log('response: ', response)
+  })
 }
 </script>
 

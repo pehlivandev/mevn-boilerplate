@@ -1,9 +1,14 @@
+import api from '@/config/axios.config'
+
 const wordService = {
-	getWords () {
-		return
+	async getWords () {
+		console.log('get words')
 	},
 
-	setWord () {
-		return
+	async setWord (data) {
+		const response = await api.post('/api/task', data)
+		return response
 	}
 }
+
+export default wordService
