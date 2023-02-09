@@ -28,7 +28,7 @@
       <div class="word-list">
         <div class="word" v-for="word in words" :key="word._id">
           <b>{{ word.name }}</b> - {{ word.description }} 
-          <span class="delete" @click="deleteWord()">&#10006;</span>
+          <span class="delete" @click="deleteWord(word._id)">&#10006;</span>
         </div>
       </div>
     </div>
@@ -72,8 +72,10 @@ function addWord () {
   })
 }
 
-function deleteWord () {
-  alert('delete word')
+function deleteWord (id) {
+  wordService.deleteWord(id).then(response => {
+    console.log('response: ', response)
+  })
 }
 </script>
 

@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 
-const taskController = require('./controller/task.controller')
+const wordController = require('./controller/word.controller')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -34,24 +34,24 @@ app.get('/', (req, res) => {
   res.send(`<h1>Hello world</h1>`)
 })
 
-app.get('/api/tasks', (req, res) => {
-  taskController.getTasks().then(data => res.json(data))
+app.get('/api/words', (req, res) => {
+  wordController.getWords().then(data => res.json(data))
 })
 
-app.post('/api/task', (req, res) => {
-  taskController.setTask(req.body).then(data => {
+app.post('/api/word', (req, res) => {
+  wordController.setWord(req.body).then(data => {
     return res.json(data)
   })
 })
 
-app.put('/api/task', (req, res) => {
-  taskController.updateTask(req.body).then(data => {
+app.put('/api/word', (req, res) => {
+  wordController.updateWord(req.body).then(data => {
     return res.json(data)
   })
 })
 
-app.delete('/api/task/:id', (req, res) => {
-  taskController.deleteTask(req.params.id).then(data => {
+app.delete('/api/word/:id', (req, res) => {
+  wordController.deleteWord(req.params.id).then(data => {
     return res.json(data)
   })
 })
