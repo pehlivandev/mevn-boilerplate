@@ -16,7 +16,7 @@
             <span
               class="delete"
               @click="deleteWord(word._id)">
-              &#10007;
+              &#10006;
             </span>
           </div>
         </div>
@@ -56,11 +56,6 @@
               value="Düzenle"
               @click="editWord()"
             />
-            <input
-              type="button"
-              value="Vazgeç"
-              @click="toAddMode()"
-            />
           </template>
           <input
             v-else
@@ -71,6 +66,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="add-word" @click="toAddMode()">
+    <div class="plus">&#10010;</div>
   </div>
 </template>
 
@@ -140,6 +138,8 @@ function toEditMode (word) {
 }
 
 function toAddMode () {
+  toChangePopupStatus(true)
+
   editingId.value = ''
   state.name = ''
   state.description = ''
@@ -216,7 +216,7 @@ header {
   align-items: center;
   .buttons {
     span {
-      padding: 5px;
+      padding: 2px;
       font-size: 20px;
       cursor: pointer;
       &.delete {
@@ -235,7 +235,9 @@ footer {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.708);
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -267,7 +269,28 @@ footer {
       & > div {
         margin-bottom: 20px;
       }
+      input[type=button] {
+        margin-top: 30px;
+      }
     }
+  }
+}
+.add-word {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  .plus {
+    text-shadow: 2px 2px #fff;
   }
 }
 </style>
