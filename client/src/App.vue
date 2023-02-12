@@ -2,9 +2,37 @@
   <div class="main">
     <header>header</header>
     <div class="content">
+      <div class="word-list">
+        <div class="word" v-for="word in words" :key="word._id">
+          <div>
+            <b>{{ word.name }}</b> - {{ word.description }}
+          </div>
+          <div class="buttons">
+            <span
+              class="edit"
+              @click="toEditMode(word)">
+              &#9997;
+            </span>
+            <span
+              class="delete"
+              @click="deleteWord(word._id)">
+              &#10007;
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>footer</footer>
+  </div>
+  <div v-if="statusOfPopup" class="popup">
+    <div class="popup-inside">
+      <div class="close" @click="toChangePopupStatus(false)">
+        &#10007;
+      </div>
       <div class="create-word">
+        <h3>{{ editingId ? 'Düzenle' : 'Yeni Kelime' }}</h3>
         <div>
-          <label for="name">Kelime Ekle</label>
+          <label for="name">Kelime</label>
           <input
             type="text"
             name="name"
@@ -42,15 +70,7 @@
           />
         </div>
       </div>
-      <div class="word-list">
-        <div class="word" v-for="word in words" :key="word._id">
-          <b>{{ word.name }}</b> - {{ word.description }}
-          <span class="edit" @click="toEditMode(word)">&#9998;</span>
-          <span class="delete" @click="deleteWord(word._id)">&#10006;</span>
-        </div>
-      </div>
     </div>
-    <footer>footer</footer>
   </div>
 </template>
 
@@ -61,6 +81,7 @@ import wordService from '@/services/word.service'
 
 const words = ref([])
 const editingId = ref('')
+const statusOfPopup = ref(false)
 
 const state = reactive({
   name: '',
@@ -111,6 +132,8 @@ function deleteWord (id) {
 }
 
 function toEditMode (word) {
+  toChangePopupStatus(true)
+
   editingId.value = word._id
   state.name = word.name
   state.description = word.description
@@ -122,11 +145,38 @@ function toAddMode () {
   state.description = ''
 }
 
+function toChangePopupStatus (status) {
+  statusOfPopup.value = status
+}
+
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 label {
   display: block;
+  margin-bottom: 5px;
+}
+input[type=text] {
+  border: 3px solid #c1c1c1;
+  border-radius: 15px;
+  outline: none;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 20px;
+  font-weight: 700;
+}
+input[type=button] {
+  background-color: aquamarine;
+  border: 3px solid #68f7c7;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
 }
 body {
   padding: 0;
@@ -152,17 +202,72 @@ header {
   width: 640px;
   margin: auto;
 }
+.word-list {
+  margin: 20px 0;
+}
 .word {
-  .edit {
-    cursor: pointer;
-  }
-  .delete {
-    color: red;
-    cursor: pointer;
+  border: 3px solid #c1c1c1;
+  box-shadow: 3px 4px 0 0 #e9e9e9;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .buttons {
+    span {
+      padding: 5px;
+      font-size: 20px;
+      cursor: pointer;
+      &.delete {
+        color: red;
+      }
+    }
   }
 }
 footer {
   padding: 10px;
   background-color: wheat;
+}
+.popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.708);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .popup-inside {
+    width: 400px;
+    max-width: 95%;
+    max-height: 95%;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    position: relative;
+    border: 3px solid #c1c1c1;
+    .close {
+      position: absolute;
+      right: -15px;
+      top: -15px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #c1c1c1;
+      color: red;
+      background-color: #fff;
+      text-align: center;
+      line-height: 24px;
+      cursor: pointer;
+      font-size: 22px;
+    }
+    .create-word {
+      & > div {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
 </style>
