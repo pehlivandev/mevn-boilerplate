@@ -55,7 +55,12 @@ header {
 .content {
   flex-grow: 1;
   width: 640px;
+  padding: 20px 0;
   margin: auto;
+  max-width: 92%;
+  &.form-content {
+    width: 400px;
+  }
 }
 .word-list {
   margin: 20px 0;
@@ -121,16 +126,6 @@ footer {
       font-size: 22px;
     }
     .create-word {
-      .form {
-        & > div {
-          &:nth-child(1) {
-            margin-bottom: 20px;
-          }
-          &:nth-child(2) {
-            margin-bottom: 40px;
-          }
-        }
-      }
       .info {
         line-height: 16px;
         font-size: 13px;
@@ -155,6 +150,15 @@ footer {
   cursor: pointer;
   .plus {
     text-shadow: 2px 2px #fff;
+  }
+}
+.form {
+  & > div {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-top: 40px;
+      margin-bottom: 0;
+    }
   }
 }
 </style>
