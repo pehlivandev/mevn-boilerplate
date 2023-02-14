@@ -7,7 +7,7 @@ connect()
 const wordRepository = {
 	async getWords() {
 		const words = await Word.find({})
-		console.log('words::: ', words)
+		// console.log('words::: ', words)
 		return words
 	},
 
@@ -27,7 +27,7 @@ const wordRepository = {
 		let word = {}
 
 		try {
-			word = await Word.updateOne(data)
+			word = await Word.updateOne({ _id: data.id }, data)
 		} catch (err) {
 			logger.error(`Error::: ${err}`)
 		}

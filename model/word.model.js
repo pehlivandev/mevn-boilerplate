@@ -1,8 +1,13 @@
 const mongoose = require('mongoose')
 
 const wordSchema = new mongoose.Schema({
-	name: 'string',
-	description: 'string'
+	name: {
+		type: String,
+		required: true
+	},
+	description: {
+		type: String
+	}
 })
 
 const Word = mongoose.model('words', wordSchema)

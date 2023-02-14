@@ -31,39 +31,41 @@
       </div>
       <div class="create-word">
         <h3>{{ editingId ? 'Düzenle' : 'Yeni Kelime' }}</h3>
-        <div>
-          <label for="name">Kelime</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            v-model="v$.name.$model"
-          />
-        </div>
-        <div>
-          <label for="description">Açıklama</label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            v-model="v$.description.$model"
-          />
-        </div>
-        <div>
-          <template v-if="editingId">
+        <div class="form">
+          <div>
+            <label for="name">Kelime</label>
             <input
+              type="text"
+              name="name"
+              id="name"
+              v-model="v$.name.$model"
+            />
+          </div>
+          <div>
+            <label for="description">Açıklama</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              v-model="v$.description.$model"
+            />
+          </div>
+          <div>
+            <input
+              v-if="editingId"
               type="button"
               value="Düzenle"
               @click="editWord()"
             />
-          </template>
-          <input
-            v-else
-            type="button"
-            value="Ekle"
-            @click="addWord()"
-          />
+            <input
+              v-else
+              type="button"
+              value="Ekle"
+              @click="addWord()"
+            />
+          </div>
         </div>
+        <div class="info">form info</div>
       </div>
     </div>
   </div>
@@ -112,7 +114,7 @@ function addWord () {
 
 function editWord () {
   const data = {
-    _id: editingId.value,
+    id: editingId.value,
     name: state.name,
     description: state.description
   }
@@ -236,8 +238,8 @@ footer {
   top: 0;
   bottom: 0;
   z-index: 9;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.8);
+  // backdrop-filter: blur(10px); // it has performance issue
   display: flex;
   justify-content: center;
   align-items: center;
@@ -266,11 +268,20 @@ footer {
       font-size: 22px;
     }
     .create-word {
-      & > div {
-        margin-bottom: 20px;
+      .form {
+        & > div {
+          &:nth-child(1) {
+            margin-bottom: 20px;
+          }
+          &:nth-child(2) {
+            margin-bottom: 40px;
+          }
+        }
       }
-      input[type=button] {
-        margin-top: 30px;
+      .info {
+        line-height: 16px;
+        font-size: 13px;
+        margin-top: 5px;
       }
     }
   }
