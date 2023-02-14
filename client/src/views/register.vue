@@ -1,5 +1,5 @@
 <template>
-	<div>
-		register
-	</div>
+  <div>
+    register
+  </div>
 </template>
