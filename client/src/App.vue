@@ -10,6 +10,9 @@
 * {
   box-sizing: border-box;
 }
+a {
+  color: #2c3e50;
+}
 label {
   display: block;
   margin-bottom: 5px;
@@ -19,7 +22,7 @@ input[type=text] {
   border-radius: 15px;
   outline: none;
   width: 100%;
-  padding: 8px 16px;
+  padding: 10px 16px;
   font-size: 20px;
   font-weight: 700;
 }
@@ -29,9 +32,21 @@ input[type=button] {
   width: 100%;
   font-size: 18px;
   font-weight: 700;
-  padding: 10px;
+  padding: 11px;
   border-radius: 15px;
   cursor: pointer;
+}
+.form-link {
+  font-size: 12px;
+  text-align: center;
+  margin: 40px 0 0;
+  a {
+    text-decoration: underline;
+  }
+}
+button {
+  outline: none !important;
+  box-shadow: none;
 }
 body {
   padding: 0;

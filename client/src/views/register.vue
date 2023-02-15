@@ -13,7 +13,7 @@
           />
         </div>
         <div>
-          <label for="email">Email</label>
+          <label for="email">E-Posta</label>
           <input
             type="text"
             name="email"
@@ -46,6 +46,9 @@
             @click="register()"
           />
         </div>
+      </div>
+      <div class="form-link">Zaten üye misin? 
+        <router-link to="/login">Giriş yap</router-link>
       </div>
     </div>
   </div>
